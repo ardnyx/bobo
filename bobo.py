@@ -70,5 +70,56 @@ class BoboVisualizer:
         
         import time
         time.sleep(self.delay)
+        
+    def show_multi(self, grids, labels=None, message=""):
+        """Renders multiple 2D grids side-by-side."""
+        self.step_count += 1
+        
+        if self.clear_screen:
+            os.system('cls' if os.name == 'nt' else 'clear')
 
+        print(f"\n{self.BOLD_YELLOW}[Step {self.step_count}]{self.RESET} {message}\n")
+
+        # 1. Print Header Labels (if provided)
+        if labels:
+            header_string = ""
+            for i, label in enumerate(labels):
+                # Calculate approx width of the grid to center the label (assuming 3 chars per cell)
+                width = len(grids[i][0]) * 3 
+                header_string += f"{label:^{width}}" # Centers the text within that width
+                
+                # Add the visual divider spacing
+                if i < len(grids) - 1:
+                    header_string += "    |    " 
+            print(header_string)
+            print("-" * len(header_string)) # Adds a nice underline beneath headers
+
+        # 2. Find the tallest grid so we know how many rows to loop
+        max_rows = max(len(g) for g in grids)
+
+        # 3. Zip the rows together!
+        for r in range(max_rows):
+            combined_row = ""
+            
+            for i, grid in enumerate(grids):
+                # Check if this specific grid has this row (prevents crashing if grids are different heights)
+                if r < len(grid):
+                    row_str = ""
+                    for item in grid[r]:
+                        # Look up symbol in mapping, or print raw value
+                        row_str += self.mapping.get(item, f" {item} ")
+                    combined_row += row_str
+                else:
+                    # If this grid is shorter, just print empty spaces to maintain alignment
+                    width = len(grids[i][0]) * 3
+                    combined_row += " " * width
+
+                # Add the visual divider spacing between grids
+                if i < len(grids) - 1:
+                    combined_row += "\033[90m    |    \033[0m" # Dark gray divider line
+                    
+            print(combined_row)
+            
+        import time
+        time.sleep(self.delay)
 bobo = BoboVisualizer()
