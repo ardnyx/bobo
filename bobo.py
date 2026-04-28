@@ -67,7 +67,7 @@ class BoboVisualizer:
         import time
         time.sleep(self.delay)
 
-    def show_multi(self, grids, labels=None, message=""):
+    def show_multi(self, grids, labels=None, message="", overlays=None):
         """Renders multiple 2D grids side-by-side."""
         self.step_count += 1
         
@@ -76,21 +76,27 @@ class BoboVisualizer:
 
         print(f"\n{self.BOLD_YELLOW}[Step {self.step_count}]{self.RESET} {message}\n")
 
+        # NEW: Build the overlay dictionary for the multi-grid view!
+        overlay_dict = {}
+        if overlays:
+            for item in overlays:
+                if len(item) == 3:
+                    overlay_dict[(item[0], item[1])] = item[2]
+                elif len(item) == 2:
+                    overlay_dict[(0, item[0])] = item[1]
+
         # 1. Print Header Labels (if provided)
         if labels:
             header_string = ""
             for i, label in enumerate(labels):
-                # Calculate approx width of the grid to center the label (assuming 3 chars per cell)
                 width = len(grids[i][0]) * 3 
-                header_string += f"{label:^{width}}" # Centers the text within that width
-                
-                # Add the visual divider spacing
+                header_string += f"{label:^{width}}" 
                 if i < len(grids) - 1:
                     header_string += "    |    " 
             print(header_string)
-            print("-" * len(header_string)) # Adds a nice underline beneath headers
+            print("-" * len(header_string))
 
-        # 2. Find the tallest grid so we know how many rows to loop
+        # 2. Find the tallest grid
         max_rows = max(len(g) for g in grids)
 
         # 3. Zip the rows together!
@@ -98,21 +104,28 @@ class BoboVisualizer:
             combined_row = ""
             
             for i, grid in enumerate(grids):
-                # Check if this specific grid has this row (prevents crashing if grids are different heights)
                 if r < len(grid):
                     row_str = ""
-                    for item in grid[r]:
+                    for c, item in enumerate(grid[r]):
+                        
+                        # NEW: Check if there is a ghost overlay, but ONLY apply it 
+                        # to the very first grid (i == 0) so we don't accidentally 
+                        # draw ghosts on the DP/Distance tables!
+                        if i == 0 and (r, c) in overlay_dict:
+                            display_val = overlay_dict[(r, c)]
+                        else:
+                            display_val = item
+                            
                         # Look up symbol in mapping, or print raw value
-                        row_str += self.mapping.get(item, f" {item} ")
+                        row_str += self.mapping.get(display_val, f" {display_val} ")
                     combined_row += row_str
                 else:
-                    # If this grid is shorter, just print empty spaces to maintain alignment
                     width = len(grids[i][0]) * 3
                     combined_row += " " * width
 
                 # Add the visual divider spacing between grids
                 if i < len(grids) - 1:
-                    combined_row += "\033[90m    |    \033[0m" # Dark gray divider line
+                    combined_row += "\033[90m    |    \033[0m" 
                     
             print(combined_row)
             
