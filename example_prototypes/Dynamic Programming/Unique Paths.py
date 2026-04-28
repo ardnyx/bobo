@@ -1,6 +1,5 @@
 from bobo import bobo
 
-# We only map 0 to a dot. We let all other numbers (1, 2, 3...) print naturally!
 bobo.configure(mapping={0: "\033[90m . \033[0m"}, delay=0.8, clear_screen=True)
 
 def unique_paths(rows: int, cols: int) -> int:
