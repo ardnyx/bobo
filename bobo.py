@@ -24,32 +24,51 @@ class BoboVisualizer:
         if delay is not None: self.delay = delay
         if clear_screen is not None: self.clear_screen = clear_screen
 
-    def show(self, data, message=""):
+    def show(self, data, message="", overlays=None):
         is_2d = isinstance(data[0], list)
         grid = data if is_2d else [data]
 
-        # 1. Build the visual string first (don't print yet)
+        # NEW: Convert the list of tuples into a fast-lookup dictionary
+        # Example: [(2, 3, 4)] becomes {(2, 3): 4}
+        overlay_dict = {}
+        if overlays:
+            for item in overlays:
+                # Handle both 2D (row, col, val) and 1D (col, val) overlays
+                if len(item) == 3:
+                    overlay_dict[(item[0], item[1])] = item[2]
+                elif len(item) == 2:
+                    overlay_dict[(0, item[0])] = item[1]
+
+        # 1. Build the visual string first
         current_state_string = ""
-        for row in grid:
-            for item in row:
-                current_state_string += self.mapping.get(item, f" {item} ")
+        for r, row in enumerate(grid):
+            for c, item in enumerate(row):
+                
+                # NEW: Check if there is a ghost overlay at this coordinate
+                if (r, c) in overlay_dict:
+                    display_val = overlay_dict[(r, c)]
+                else:
+                    display_val = item
+                    
+                # Look up the symbol (using the ghost value or the real value)
+                current_state_string += self.mapping.get(display_val, f" {display_val} ")
             current_state_string += "\n"
 
-        # 2. If the grid looks exactly the same as the last frame, skip it!
+        # 2. Visual Diffing (Skip if identical)
         if current_state_string == self.last_state_string:
             return 
 
-        # 3. If it's a new visual state, render it.
+        # 3. Render
         self.last_state_string = current_state_string
         self.step_count += 1
         
-        # Clear the terminal for that true "animation" feel
         if self.clear_screen:
             os.system('cls' if os.name == 'nt' else 'clear')
 
         print(f"{self.BOLD_YELLOW}[Step {self.step_count}]{self.RESET} {message}")
         print(current_state_string)
         
+        import time
         time.sleep(self.delay)
 
 bobo = BoboVisualizer()
