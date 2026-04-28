@@ -6,11 +6,7 @@ class BoboVisualizer:
         self.RESET = "\033[0m"
         self.BOLD_YELLOW = "\033[1;33m"
         
-        self.mapping = {
-            0: "\033[90m . \033[0m",
-            1: "\033[97m[ ]\033[0m",
-            2: "\033[96m[■]\033[0m",
-        }
+        self.mapping = {}
         self.delay = 0.5
         self.step_count = 0
         
@@ -70,7 +66,7 @@ class BoboVisualizer:
         
         import time
         time.sleep(self.delay)
-        
+
     def show_multi(self, grids, labels=None, message=""):
         """Renders multiple 2D grids side-by-side."""
         self.step_count += 1
