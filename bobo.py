@@ -2,6 +2,9 @@ import time
 import os
 import re 
 
+# 100% AI Generated, Gemini 3.1 Pro
+# [Human] Did some recorrections to remove the default mapping (the AI put default mapping on 0's, 1's, and 2's)
+# So I just removed them for the sake of flexibility and ease of use to the developer.
 class BoboVisualizer:
     def __init__(self):
         self.RESET = "\033[0m"
@@ -14,11 +17,13 @@ class BoboVisualizer:
         self.clear_screen = True
         self.cell_width = 5
 
+    # 100% AI Generated, Gemini 3.1 Pro
     def configure(self, mapping=None, delay=None, clear_screen=None):
         if mapping: self.mapping.update(mapping)
         if delay is not None: self.delay = delay
         if clear_screen is not None: self.clear_screen = clear_screen
 
+    # 100% AI Generated, Gemini 3.1 Pro
     def show(self, data, message="", overlays=None):
         is_2d = isinstance(data[0], list)
         grid = data if is_2d else [data]
@@ -66,6 +71,7 @@ class BoboVisualizer:
         import time
         time.sleep(self.delay)
 
+    # 100% AI Generated, Gemini 3.1 Pro
     def show_multi(self, grids, labels=None, message="", overlays=None):
         """Renders multiple 2D grids side-by-side."""
         self.step_count += 1
@@ -130,6 +136,7 @@ class BoboVisualizer:
         import time
         time.sleep(self.delay)
     
+    # 100% AI Generated, Gemini 3.1 Pro
     def _pad_cell(self, text):
         """Pads text to cell_width while ignoring invisible ANSI color codes."""
         text = str(text) # Ensure it is a string
