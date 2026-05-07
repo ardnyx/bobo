@@ -1,5 +1,6 @@
 import time
 import os
+import re 
 
 class BoboVisualizer:
     def __init__(self):
@@ -9,11 +10,9 @@ class BoboVisualizer:
         self.mapping = {}
         self.delay = 0.5
         self.step_count = 0
-        
-        # NEW: Track the last visual state so we skip redundant frames
         self.last_state_string = "" 
-        # NEW: Animate in place instead of scrolling down
-        self.clear_screen = True 
+        self.clear_screen = True
+        self.cell_width = 5
 
     def configure(self, mapping=None, delay=None, clear_screen=None):
         if mapping: self.mapping.update(mapping)
@@ -76,7 +75,7 @@ class BoboVisualizer:
 
         print(f"\n{self.BOLD_YELLOW}[Step {self.step_count}]{self.RESET} {message}\n")
 
-        # NEW: Build the overlay dictionary for the multi-grid view!
+        # Build the overlay dictionary for the multi-grid view!
         overlay_dict = {}
         if overlays:
             for item in overlays:
@@ -89,7 +88,8 @@ class BoboVisualizer:
         if labels:
             header_string = ""
             for i, label in enumerate(labels):
-                width = len(grids[i][0]) * 3 
+                # FIXED: Uses self.cell_width instead of the hardcoded 3
+                width = len(grids[i][0]) * self.cell_width 
                 header_string += f"{label:^{width}}" 
                 if i < len(grids) - 1:
                     header_string += "    |    " 
@@ -108,19 +108,17 @@ class BoboVisualizer:
                     row_str = ""
                     for c, item in enumerate(grid[r]):
                         
-                        # NEW: Check if there is a ghost overlay, but ONLY apply it 
-                        # to the very first grid (i == 0) so we don't accidentally 
-                        # draw ghosts on the DP/Distance tables!
-                        if i == 0 and (r, c) in overlay_dict:
-                            display_val = overlay_dict[(r, c)]
-                        else:
-                            display_val = item
-                            
-                        # Look up symbol in mapping, or print raw value
-                        row_str += self.mapping.get(display_val, f" {display_val} ")
+                        # Apply overlay only to the very first grid (i == 0)
+                        display_val = overlay_dict.get((r, c), item) if i == 0 else item 
+                        
+                        # Fetch mapped string or raw string, then apply smart padding
+                        raw_text = self.mapping.get(display_val, str(display_val))
+                        row_str += self._pad_cell(raw_text)
+                        
                     combined_row += row_str
                 else:
-                    width = len(grids[i][0]) * 3
+                    # FIXED: Uses self.cell_width for empty grid balancing
+                    width = len(grids[i][0]) * self.cell_width
                     combined_row += " " * width
 
                 # Add the visual divider spacing between grids
@@ -131,4 +129,21 @@ class BoboVisualizer:
             
         import time
         time.sleep(self.delay)
+    
+    def _pad_cell(self, text):
+        """Pads text to cell_width while ignoring invisible ANSI color codes."""
+        text = str(text) # Ensure it is a string
+        
+        # Regex to match invisible ANSI escape sequences
+        ansi_escape = re.compile(r'\x1b\[[0-9;]*m')
+        
+        # Calculate the length of the string without the color codes
+        visible_length = len(ansi_escape.sub('', text))
+        
+        # Figure out how much space we need to add to reach cell_width
+        padding_needed = max(0, self.cell_width - visible_length)
+        left_pad = padding_needed // 2
+        right_pad = padding_needed - left_pad
+        
+        return (" " * left_pad) + text + (" " * right_pad)
 bobo = BoboVisualizer()
