@@ -37,7 +37,7 @@ bobo.show_multi(
 ```
 ___
 # Configuration with Basic ANSI Escape Codes
-Bobo uses standard terminal ANSI codes to colorize text. An ANSI code acts like an invisible wrapper around your text. The Syntax: "\033[COLOR_CODEm" + "Your Text" + "\033[0m"(Always remember to end with \033[0m to reset the color, otherwise your whole terminal will change color.)
+Bobo uses standard terminal ANSI codes to colorize text. An ANSI code acts like an invisible wrapper around your text. The Syntax: `"\033[COLOR_CODEm" + "Your Text" + "\033[0m"` (Always remember to end with \033[0m to reset the color, otherwise your whole terminal will change color.)
 
 # Basic Cheat Sheet  
 Note: You can freely change the symbol according to what you want/what you need.
