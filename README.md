@@ -36,3 +36,7 @@ bobo.show_multi(
 )
 ```
 ___
+Configuration with Basic ANSI Escape Codes
+Bobo uses standard terminal ANSI codes to colorize text. An ANSI code acts like an invisible wrapper around your text. The Syntax: "\033[COLOR_CODEm" + "Your Text" + "\033[0m"(Always remember to end with \033[0m to reset the color, otherwise your whole terminal will change color.)
+
+# Basic Cheat Sheet of the best colors to use in your bobo.configure(mapping={...}):ColorANSI String FormatBest Used ForDark Gray"\033[90m . \033[0m"Empty space, background grids, 0sRed"\033[91m[X]\033[0m"Obstacles, dead ends, subtracted valuesGreen"\033[92m[*]\033[0m"Winning paths, added values, targetsYellow"\033[93m[?]\033[0m"Current search nodes, warningsCyan"\033[96m[@]\033[0m"The "Head" of a search algorithm, pivotsWhite"\033[97m[ ]\033[0m"Standard walls, generic blocks
