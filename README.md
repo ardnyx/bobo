@@ -40,9 +40,12 @@ ___
 Bobo uses standard terminal ANSI codes to colorize text. An ANSI code acts like an invisible wrapper around your text. The Syntax: "\033[COLOR_CODEm" + "Your Text" + "\033[0m"(Always remember to end with \033[0m to reset the color, otherwise your whole terminal will change color.)
 
 # Basic Cheat Sheet  
-Dark Gray `"\033[90m . \033[0m" `
-Red `"\033[91m[X]\033[0m"`
-Green `"\033[92m[*]\033[0m"`
-Yellow `"\033[93m[?]\033[0m"`
-Cyan `"\033[96m[@]\033[0m"`
-White `"\033[97m[ ]\033[0m"`
+Note: You can freely change the symbol according to what you want/what you need.
+| Color | Symbol / Legend | Code |
+|------|--------|------|
+| ⚫ Dark Gray | . | `\033[90m . \033[0m` |
+| 🔴 Red | [X] | `\033[91m[X]\033[0m` |
+| 🟢 Green | [*] | `\033[92m[*]\033[0m` |
+| 🟡 Yellow | [?] | `\033[93m[?]\033[0m` |
+| 🔵 Cyan | [@] | `\033[96m[@]\033[0m` |
+| ⚪ White | [ ] | `\033[97m[ ]\033[0m` |
