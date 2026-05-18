@@ -7,11 +7,8 @@
  ##    ##  ##    ##  ##    ##  ##    ## 
  ###mm##"  "##mm##"  ###mm##"  "##mm##" 
  "" """      """"    "" """      """"                                       
-
-A visualizer that helps visualize grid-based algorithms
-(but still testing which algorithms work best),
-written in Python and heavily vibe-coded with AI.
 ```
+A visualizer that helps visualize grid-based algorithms (but still testing which algorithms work best), written in Python (for Python) and heavily vibe-coded with AI.
 ___
 # Code Insertion Guide
 `bobo.configure()`
