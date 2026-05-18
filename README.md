@@ -1,5 +1,12 @@
-# bobo
-A terminal array/grid-based algorithm visualizer for Python
+                                        
+ mm                  mm                 
+ ##                  ##                 
+ ##m###m    m####m   ##m###m    m####m  
+ ##"  "##  ##"  "##  ##"  "##  ##"  "## 
+ ##    ##  ##    ##  ##    ##  ##    ## 
+ ###mm##"  "##mm##"  ###mm##"  "##mm##" 
+ "" """      """"    "" """      """"                                       
+A visualizer that helps visualize grid-based algorithms (but still in testing on what grid-based algorithms works best) written in python, heavily vibe coded with AI.
 ___
 # Code Insertion Guide
 `bobo.configure()`
