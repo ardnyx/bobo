@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools >= 68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bobo-viz"
+version = "2.0.0"
+description = "Zero-config terminal visualizer for grid-based algorithms (works best when there are actual mutations in the grid)."
+readme = "README.md"
+license = "MIT"
+requires-python = ">= 3.8"
+authors = [
+    { name = "Rei" },
+]
+keywords = ["visualization", "algorithm", "grid", "terminal", "debugging"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Education",
+    "Topic :: Software Development :: Debuggers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/bobo"
+Repository = "https://github.com/your-username/bobo"
+
+[project.scripts]
+bobo = "bobo.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["bobo*"]
+exclude = ["examples*", "tests*"]
