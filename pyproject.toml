@@ -3,7 +3,7 @@ requires = ["setuptools >= 68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bobo-viz"
+name = "bobo"
 version = "2.0.0"
 description = "Zero-config terminal visualizer for grid-based algorithms (works best when there are actual mutations in the grid)."
 readme = "README.md"
@@ -31,8 +31,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-username/bobo"
-Repository = "https://github.com/your-username/bobo"
+Homepage = "https://github.com/ardnyx/bobo"
+Repository = "https://github.com/ardnyx/bobo"
 
 [project.scripts]
 bobo = "bobo.cli:main"
