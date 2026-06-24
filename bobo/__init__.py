@@ -20,4 +20,4 @@ from .visualizer import BoboVisualizer
 bobo = BoboVisualizer()
 
 __all__ = ["bobo", "BoboVisualizer"]
-__version__ = "2.0.0"
+__version__ = "1.0.0"
