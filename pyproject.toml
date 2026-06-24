@@ -1,42 +1,23 @@
 [build-system]
-requires = ["setuptools >= 68.0", "wheel"]
+requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "bobo"
-version = "2.0.0"
-description = "Zero-config terminal visualizer for grid-based algorithms (works best when there are actual mutations in the grid)."
-readme = "README.md"
-license = "MIT"
-requires-python = ">= 3.8"
+version = "1.0.0"
 authors = [
-    { name = "Rei" },
+  { name="ardnyx", email="dannleyesa@gmail.com" },
 ]
-keywords = ["visualization", "algorithm", "grid", "terminal", "debugging"]
+description = "A zero-config terminal-based grid algorithms visualizer."
+readme = "README.md"
+requires-python = ">=3.9"
 classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Environment :: Console",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Education",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Topic :: Education",
-    "Topic :: Software Development :: Debuggers",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: OS Independent",
 ]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
 
 [project.urls]
 Homepage = "https://github.com/ardnyx/bobo"
-Repository = "https://github.com/ardnyx/bobo"
-
-[project.scripts]
-bobo = "bobo.cli:main"
-
-[tool.setuptools.packages.find]
-include = ["bobo*"]
-exclude = ["examples*", "tests*"]
+Issues = "https://github.com/ardnyx/bobo/issues"
