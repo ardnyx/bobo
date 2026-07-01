@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bobo"
-version = "1.0.0"
+version = "1.0.1"  # Tip: Bump the version before uploading to TestPyPI again!
 authors = [
   { name="ardnyx", email="dannleyesa@gmail.com" },
 ]
@@ -21,3 +21,6 @@ license-files = ["LICEN[CS]E*"]
 [project.urls]
 Homepage = "https://github.com/ardnyx/bobo"
 Issues = "https://github.com/ardnyx/bobo/issues"
+
+[project.scripts]
+bobo = "bobo.cli:main"
