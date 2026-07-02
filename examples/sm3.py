@@ -13,7 +13,7 @@ def print_matrix(name, matrix):
     for row in matrix:
         print(f"[{', '.join(f'{n:2}' for n in row)}]")
 
-def student_c_data_scientist():
+def sm3():
     matrix = get_matrix()
     rows, cols = len(matrix), len(matrix[0])
     
@@ -39,4 +39,4 @@ def student_c_data_scientist():
             
     return matrix
 
-print_matrix("Solution: ", student_c_data_scientist())
+print_matrix("Solution: ", sm3())

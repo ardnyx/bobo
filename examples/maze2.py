@@ -60,10 +60,6 @@ def solve_pheromones(maze):
     while current != exit_pos:
         neighbors = get_neighbors(current[0], current[1], maze)
         
-        # CREATIVE LOGIC: Look at all valid adjacent tiles. 
-        # Move to the one with the lowest "visited" score. 
-        # This naturally pushes the algorithm out of dead ends, 
-        # because dead ends build up a high "scent" score.
         best_neighbor = None
         lowest_visits = float('inf')
         
